@@ -32,6 +32,7 @@ import SiteFooter from '@008h/design/astro/SiteFooter.astro';
 ```
 
 - `@008h/design/tokens.css` はトークンだけ(`base.css` の本文・リンク・フォーカスのスタイルを含まない)。既に自前のベーススタイルを持つサイト向け
+- Astro の `ClientRouter` を使うサイトは、`<html data-site="...">` をレイアウトに直接書く。遷移時に `<html>` の属性が差し替わり、`ThemeScript` が実行時に付けた `data-site` は消える(`data-theme` は復元される)
 - `<html data-site="...">` でテーマ(`pixtitch` / `blog`)、`data-theme="light|dark"` でモードを切り替える。`ThemeScript` が両方を初期化する
 - UnoCSS: `presets: [presetWind4(), presetTanoshi()]`(`@008h/design/uno`)。`bg-bg` `text-fg` `border-line` `text-accent-1` が使える
 - Tailwind v4: `@import '@008h/design/tailwind.css';`
