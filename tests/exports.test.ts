@@ -16,9 +16,9 @@ describe('package exports', () => {
     expect(existsSync(new URL(path, root))).toBe(true);
   });
 
-  it('tokens.css imports base and accents but not the base styles', () => {
+  it('tokens.css imports only the token files, not the base styles', () => {
     const css = readFileSync(new URL('src/tokens/index.css', root), 'utf8');
-    expect(css).toContain("./base.css");
-    expect(css).toContain("./accents.css");
+    const imports = [...css.matchAll(/@import\s+'([^']+)'/g)].map((match) => match[1]);
+    expect(imports).toEqual(['./base.css', './accents.css']);
   });
 });
