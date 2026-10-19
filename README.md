@@ -5,9 +5,11 @@
 ## Install
 
 ```sh
-pnpm add @008h/design
+pnpm add github:008h/tanoshikunarukoto-design#v0.1.0
 pnpm add @fontsource-variable/urbanist @fontsource/kosugi
 ```
+
+npm には公開しない。git のタグで版を固定し、ビルド済みの `dist/` をリポジトリにコミットして配る(インストール時にビルドは走らない)。更新するときは、タグを新しくして各サイトの指定を書き換える。
 
 フォントは配らない。サイト側で上の 2 つを import する(`--font-sans` は Urbanist → Kosugi の順)。
 
@@ -52,4 +54,4 @@ tanoshi-check-colors --allow-oklch src/styles/
 
 ## Development
 
-`pnpm gate`(check-colors → stylelint → tsc → astro check → vitest → build → e2e)。方針は `docs/AGENT.md` と `docs/DECISIONS.md`。
+`pnpm gate`(check-colors → stylelint → tsc → astro check → vitest → build → check-dist → e2e)。`src/` を変えたら `pnpm build` して `dist/` も一緒にコミットする。方針は `docs/AGENT.md` と `docs/DECISIONS.md`。

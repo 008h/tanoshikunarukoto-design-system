@@ -19,7 +19,7 @@
 
 ## Gate
 
-- コマンド: `pnpm gate`(`lint:css` → `typecheck` → `test` → `build`)
+- コマンド: `pnpm gate`(`check:colors` → `lint:css` → `typecheck` → `astro:check` → `test` → `build` → `check:dist` → `e2e`)
 - **ゲート自体を緩める変更は禁止**: テストの `skip`、閾値(コントラスト比 4.5 / 3)の引き下げ、`.stylelintrc.json` の緩和。失敗は色の側を直す
 
 ### 指摘の優先順位
@@ -34,6 +34,7 @@
 | `typecheck` | 該当箇所の型を直す |
 | `test` | コントラスト不足は該当トークンの L/C を調整する(テストの閾値は動かさない)。dark ブロックと `prefers-color-scheme` ブロックは同じ内容にする |
 | `build` | `tsc -p tsconfig.build.json` のエラーを直す |
+| `check:dist` | `pnpm build` して `dist/` をコミットに含める(`dist/` は git 依存で配る成果物) |
 
 ## Test policy
 
@@ -48,7 +49,8 @@
 2. **トークン名**: photo 由来の名前(`--bg` `--fg` `--muted` `--line` `--font-sans`)を変えていないか。破壊的変更は semver の major
 3. **ダークの 3 ブロック**: `:root[data-theme='dark']` と `prefers-color-scheme` ブロックが同内容か。新しいトークンを足したら 3 ブロックすべてに入れたか
 4. **アクセントの使い方**: 本文の文字色に使っていないか(ドット、下線、アイコンなどの小さな面だけ)
-5. **コメント**: 新規コードに不要なコメントを足していないか
+5. **dist**: `src/` の変更に対応する `dist/` が同じコミットに入っているか
+6. **コメント**: 新規コードに不要なコメントを足していないか
 
 ### パス別の追加エージェント
 
