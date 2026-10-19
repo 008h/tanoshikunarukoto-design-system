@@ -14,6 +14,6 @@
 
 - 状態: accepted
 - 背景: 当初は npm 公開を想定したが、個人サイト 4 つのためだけの運用としては大げさだった(アカウント、トークン、publish の手間)。
-- 決定: 各サイトは `github:008h/tanoshikunarukoto-design#<タグ>` を依存に指定する。インストール時にビルドが走る保証がないため、ビルド済みの `dist/` をコミットして配り、`pnpm check:dist` で `src/` と一致していることを gate で強制する。`package.json` は `private: true` にして誤公開を防ぐ。
+- 決定: 各サイトは `github:008h/tanoshikunarukoto-design-system#<タグ>` を依存に指定する。インストール時にビルドが走る保証がないため、ビルド済みの `dist/` をコミットして配り、`pnpm check:dist` で `src/` と一致していることを gate で強制する。`package.json` は `private: true` にして誤公開を防ぐ。
 - 根拠: レジストリもトークンも不要で、タグで版を固定できる。`.astro` と CSS はソースのまま配るので、ビルド成果物は `uno` / `sites` / CLI の `dist/` だけで足りる。
 - 影響: 版を上げるときはタグを打ち、各サイトの指定を書き換える。リポジトリが private の場合、CI に読み取りトークンが要る(public なら不要)。ADR-001 の方針(CSS 変数が正本)は変わらない。

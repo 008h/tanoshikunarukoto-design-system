@@ -5,7 +5,7 @@
 ## Install
 
 ```sh
-pnpm add github:008h/tanoshikunarukoto-design#v0.1.0
+pnpm add github:008h/tanoshikunarukoto-design-system#v0.1.0
 pnpm add @fontsource-variable/urbanist @fontsource/kosugi
 ```
 
