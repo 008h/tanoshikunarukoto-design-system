@@ -1,6 +1,6 @@
 {
   "name": "@008h/design",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Shared design tokens and small components for tanoshikunarukoto sites",
   "type": "module",
   "license": "MIT",
