@@ -1,12 +1,12 @@
 {
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "target": "ES2023",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "strict": true,
     "noUncheckedIndexedAccess": true,
-    "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts"]
+  "include": [".astro/types.d.ts", "src/**/*", "playground/**/*", "tests/**/*"],
+  "exclude": ["dist", "playground-dist"]
 }

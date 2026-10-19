@@ -18,15 +18,25 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "check:colors": "tsx src/cli/check-colors.ts",
-    "lint:css": "stylelint 'src/**/*.css' 'playground/**/*.{css,astro}'",
-    "lint:css:fix": "stylelint --fix 'src/**/*.css' 'playground/**/*.{css,astro}'",
+    "lint:css": "stylelint 'src/**/*.{css,astro}' 'playground/**/*.{css,astro}'",
+    "lint:css:fix": "stylelint --fix 'src/**/*.{css,astro}' 'playground/**/*.{css,astro}'",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "gate": "pnpm lint:css && pnpm typecheck && pnpm test && pnpm build"
+    "gate": "pnpm lint:css && pnpm typecheck && pnpm astro:check && pnpm test && pnpm build && pnpm e2e",
+    "playground:dev": "astro dev",
+    "playground:build": "astro build",
+    "playground:preview": "astro preview",
+    "astro:check": "astro check",
+    "e2e": "playwright test"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@fontsource-variable/urbanist": "^5.3.0",
+    "@fontsource/kosugi": "^5.3.0",
+    "@playwright/test": "^1.64.1",
     "@tailwindcss/node": "^4.3.3",
     "@types/node": "^26.0.0",
+    "astro": "^7.4.0",
     "postcss": "^8.5.30",
     "postcss-html": "^2.0.0",
     "stylelint": "^17.16.0",

@@ -1,0 +1,56 @@
+---
+import '@fontsource-variable/urbanist';
+import '@fontsource/kosugi';
+import '../../src/index.css';
+import '../../src/themes/pixtitch.css';
+import '../../src/themes/blog.css';
+import SiteFooter from '../../src/astro/SiteFooter.astro';
+import ThemeScript from '../../src/astro/ThemeScript.astro';
+import ThemeToggle from '../../src/astro/ThemeToggle.astro';
+import type { SiteId } from '../../src/sites.js';
+
+interface Props {
+  title: string;
+  site?: Exclude<SiteId, 'main' | 'photo'>;
+}
+
+const { title, site } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <ThemeScript site={site} />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>{title}</h1>
+        <ThemeToggle />
+      </header>
+      <slot />
+      <SiteFooter current={site} />
+    </main>
+  </body>
+</html>
+
+<style>
+  main {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: var(--space-4) var(--space-3);
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+  }
+</style>
