@@ -1,9 +1,10 @@
 :root[data-site='pixtitch'] {
   --font-display: ui-serif, 'Hiragino Mincho ProN', serif;
-  --bg: oklch(0.95 0.008 85);
-  --fg: oklch(0.25 0.01 320);
+  --bg: oklch(0.947 0.0074 80.72);
+  --fg: oklch(0.2489 0.0103 312.05);
   --muted: oklch(0.5 0.01 320);
   --line: oklch(0.86 0.01 85);
+  --scrim: oklch(0.947 0.0074 80.72 / 0.8);
 }
 
 :root[data-site='pixtitch'][data-theme='dark'] {
@@ -11,6 +12,8 @@
   --fg: oklch(0.9 0.008 85);
   --muted: oklch(0.65 0.01 85);
   --line: oklch(0.3 0.01 320);
+  --surface: oklch(0.22 0.01 320);
+  --scrim: oklch(0.18 0.01 320 / 0.8);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,5 +22,7 @@
     --fg: oklch(0.9 0.008 85);
     --muted: oklch(0.65 0.01 85);
     --line: oklch(0.3 0.01 320);
+    --surface: oklch(0.22 0.01 320);
+    --scrim: oklch(0.18 0.01 320 / 0.8);
   }
 }
