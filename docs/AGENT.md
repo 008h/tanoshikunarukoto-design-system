@@ -9,6 +9,7 @@
 - `src/tokens/base.css` — ニュートラル色、font stack、spacing。色トークン名は photo 由来(`--bg` `--fg` `--muted` `--line`)で変えない
 - `src/tokens/accents.css` — `--accent-1..5`。L/C は全色で揃え、hue だけ変える
 - `src/themes/<site>.css` — サイト別の地色の上書き。セレクタは `:root[data-site='<site>']`
+- `src/tokens/index.css`(`tokens.css` として export)— トークンだけの入口
 - `src/base.css` / `src/index.css` — 本文・リンク・フォーカスの最小スタイルと入口
 - `src/color/contrast.ts` — oklch → WCAG コントラスト比(純粋関数)
 - `src/tokens/parse.ts` — トークン CSS の解析(テストと check-colors が使う)
