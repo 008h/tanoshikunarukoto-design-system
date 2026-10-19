@@ -1,0 +1,26 @@
+html {
+  color: var(--fg);
+  font-family: var(--font-sans);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--line);
+  text-underline-offset: 0.25em;
+}
+
+a:hover {
+  text-decoration-color: var(--accent-1);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-1);
+  outline-offset: 2px;
+}

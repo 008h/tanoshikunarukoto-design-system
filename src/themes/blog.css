@@ -1,0 +1,16 @@
+:root[data-site='blog'] {
+  --bg: oklch(0.985 0.008 255.5);
+  --line: oklch(0.9 0.01 255.5);
+}
+
+:root[data-site='blog'][data-theme='dark'] {
+  --bg: oklch(0.16 0.005 255.5);
+  --line: oklch(0.28 0.01 255.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-site='blog']:not([data-theme='light']):not([data-theme='dark']) {
+    --bg: oklch(0.16 0.005 255.5);
+    --line: oklch(0.28 0.01 255.5);
+  }
+}
