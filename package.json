@@ -1,9 +1,13 @@
 {
   "name": "@008h/design",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Shared design tokens and small components for tanoshikunarukoto sites",
   "type": "module",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/008h/tanoshikunarukoto-design.git"
+  },
   "engines": {
     "node": ">=26.0.0"
   },
@@ -13,10 +17,45 @@
   },
   "files": [
     "src",
-    "dist"
+    "!src/**/*.test.ts",
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
+  "exports": {
+    "./index.css": "./src/index.css",
+    "./base.css": "./src/base.css",
+    "./themes/*.css": "./src/themes/*.css",
+    "./tailwind.css": "./src/tailwind/theme.css",
+    "./uno": {
+      "types": "./dist/uno/preset.d.ts",
+      "default": "./dist/uno/preset.js"
+    },
+    "./sites": {
+      "types": "./dist/sites.d.ts",
+      "default": "./dist/sites.js"
+    },
+    "./astro/*": "./src/astro/*",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "tanoshi-check-colors": "./dist/cli/check-colors.js"
+  },
+  "peerDependencies": {
+    "astro": ">=5.0.0",
+    "unocss": ">=66.0.0"
+  },
+  "peerDependenciesMeta": {
+    "astro": {
+      "optional": true
+    },
+    "unocss": {
+      "optional": true
+    }
+  },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "prepack": "pnpm build",
+    "build": "node -e \"fs.rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.build.json",
     "check:colors": "tsx src/cli/check-colors.ts --allow-oklch src/tokens/ --allow-oklch src/themes/ --exclude src/cli/",
     "lint:css": "stylelint 'src/**/*.{css,astro}' 'playground/**/*.{css,astro}'",
     "lint:css:fix": "stylelint --fix 'src/**/*.{css,astro}' 'playground/**/*.{css,astro}'",
