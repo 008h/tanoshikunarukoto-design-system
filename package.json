@@ -1,0 +1,30 @@
+{
+  "name": "@008h/design",
+  "version": "0.0.0",
+  "description": "Shared design tokens and small components for tanoshikunarukoto sites",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=26.0.0" },
+  "packageManager": "pnpm@12.4.1",
+  "publishConfig": { "access": "public" },
+  "files": ["src", "dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check:colors": "tsx src/cli/check-colors.ts",
+    "lint:css": "stylelint 'src/**/*.css' 'playground/**/*.{css,astro}'",
+    "lint:css:fix": "stylelint --fix 'src/**/*.css' 'playground/**/*.{css,astro}'",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "gate": "pnpm lint:css && pnpm typecheck && pnpm test && pnpm build"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "postcss": "^8.5.30",
+    "postcss-html": "^2.0.0",
+    "stylelint": "^17.16.0",
+    "stylelint-order": "^8.1.2",
+    "tsx": "^4.19.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
+  }
+}
