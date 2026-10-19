@@ -5,7 +5,7 @@
 ## Install
 
 ```sh
-pnpm add github:008h/tanoshikunarukoto-design-system#v0.2.0
+pnpm add github:008h/tanoshikunarukoto-design-system#v0.3.0
 pnpm add @fontsource-variable/urbanist @fontsource/kosugi
 ```
 
@@ -42,9 +42,12 @@ import SiteFooter from '@008h/design/astro/SiteFooter.astro';
 | トークン | 用途 |
 |---|---|
 | `--bg` `--fg` `--muted` `--line` | 地、文字、補助文字、罫線 |
+| `--surface` `--danger` | カードやパネルの地、エラー文字(`--bg` と `--surface` の両方の上でコントラスト 4.5 以上) |
 | `--accent-1..5` | ドット、下線、アイコンなどの小さな面。本文の文字色には使わない |
 | `--font-sans` `--font-display` | 本文、見出し |
 | `--space-1..5` `--measure` `--radius` | 余白、本文幅、角丸 |
+
+`ThemeToggle` の色は `--theme-toggle-color`(既定は `--muted`)で変えられる。
 
 ## check-colors
 

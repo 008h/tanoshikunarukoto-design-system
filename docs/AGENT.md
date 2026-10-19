@@ -6,7 +6,7 @@
 
 `@008h/design` — たのしくなること各サイト(photo / blog / pixtitch / tanoshikunarukoto.org)の共通デザインシステム。CSS カスタムプロパティが正本(ADR-001)。
 
-- `src/tokens/base.css` — ニュートラル色、font stack、spacing。色トークン名は photo 由来(`--bg` `--fg` `--muted` `--line`)で変えない
+- `src/tokens/base.css` — ニュートラル色(`--surface` `--danger` を含む)、font stack、spacing。色トークン名は photo 由来(`--bg` `--fg` `--muted` `--line`)で変えない
 - `src/tokens/accents.css` — `--accent-1..5`。L/C は全色で揃え、hue だけ変える
 - `src/themes/<site>.css` — サイト別の地色の上書き。セレクタは `:root[data-site='<site>']`
 - `src/tokens/index.css`(`tokens.css` として export)— トークンだけの入口
