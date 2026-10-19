@@ -1,6 +1,6 @@
 {
   "name": "@008h/design",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Shared design tokens and small components for tanoshikunarukoto sites",
   "type": "module",
   "license": "MIT",
@@ -21,6 +21,7 @@
   ],
   "exports": {
     "./index.css": "./src/index.css",
+    "./tokens.css": "./src/tokens/index.css",
     "./base.css": "./src/base.css",
     "./themes/*.css": "./src/themes/*.css",
     "./tailwind.css": "./src/tailwind/theme.css",
