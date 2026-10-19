@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { contrastRatio, parseOklch } from '../src/color/contrast.js';
+import { contrastRatio, parseOklch, toSrgbHex } from '../src/color/contrast.js';
 import { parseBlocks, type TokenBlock } from '../src/tokens/parse.js';
 
 const read = (path: string): TokenBlock[] =>
@@ -50,6 +50,14 @@ describe.each(targets)('contrast: $label', ({ mode, site }) => {
     expect(contrastRatio(color(tokens, '--muted'), color(tokens, '--bg'))).toBeGreaterThanOrEqual(4.5);
   });
 
+  it('fg on surface is at least 4.5', () => {
+    expect(contrastRatio(color(tokens, '--fg'), color(tokens, '--surface'))).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it.each(['--bg', '--surface'])('danger on %s is at least 4.5', (surface) => {
+    expect(contrastRatio(color(tokens, '--danger'), color(tokens, surface))).toBeGreaterThanOrEqual(4.5);
+  });
+
   it.each(ACCENTS)('%s on bg is at least 3', (name) => {
     expect(contrastRatio(color(tokens, name), color(tokens, '--bg'))).toBeGreaterThanOrEqual(3);
   });
@@ -70,5 +78,17 @@ describe.each(SITES)('site theme %s', (site) => {
     const light = Object.keys(layer(siteBlocks(site), siteRoot(site))).filter((name) => parseOklch(layer(siteBlocks(site), siteRoot(site))[name] ?? ''));
     const dark = Object.keys(layer(siteBlocks(site), `${siteRoot(site)}${DARK}`));
     expect(dark).toEqual(expect.arrayContaining(light));
+  });
+});
+
+describe('pixtitch theme matches the cloth baked into pixtitch-next assets', () => {
+  const tokens = resolve('light', 'pixtitch');
+
+  it('--bg is #f0ede8', () => {
+    expect(toSrgbHex(color(tokens, '--bg'))).toBe('#f0ede8');
+  });
+
+  it('--fg is #232025', () => {
+    expect(toSrgbHex(color(tokens, '--fg'))).toBe('#232025');
   });
 });
