@@ -4,10 +4,17 @@
   "description": "Shared design tokens and small components for tanoshikunarukoto sites",
   "type": "module",
   "license": "MIT",
-  "engines": { "node": ">=26.0.0" },
+  "engines": {
+    "node": ">=26.0.0"
+  },
   "packageManager": "pnpm@12.4.1",
-  "publishConfig": { "access": "public" },
-  "files": ["src", "dist"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "check:colors": "tsx src/cli/check-colors.ts",
@@ -18,13 +25,16 @@
     "gate": "pnpm lint:css && pnpm typecheck && pnpm test && pnpm build"
   },
   "devDependencies": {
+    "@tailwindcss/node": "^4.3.3",
     "@types/node": "^26.0.0",
     "postcss": "^8.5.30",
     "postcss-html": "^2.0.0",
     "stylelint": "^17.16.0",
     "stylelint-order": "^8.1.2",
+    "tailwindcss": "^4.3.3",
     "tsx": "^4.19.0",
     "typescript": "^6.0.3",
+    "unocss": "^66.11.0",
     "vitest": "^4.1.9"
   }
 }
