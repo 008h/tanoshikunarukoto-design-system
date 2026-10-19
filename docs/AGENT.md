@@ -1,56 +1,55 @@
 # AGENT.md — エージェント向け開発ガイド
 
-ルートの `CLAUDE.md` が入口。共通スキル/エージェントはこのファイルの見出しを読む（契約: orchestrator `shared/CONTRACT.md`）。
+入口は `CLAUDE.md`。共通スキル/エージェントはこのファイルの見出しを読む（契約: orchestrator `shared/CONTRACT.md`）。
 
 ## Architecture
 
-<!-- パッケージ/ディレクトリ構成、依存方向、既存ユーティリティ一覧 -->
+`@008h/design` — たのしくなること各サイト(photo / blog / pixtitch / tanoshikunarukoto.org)の共通デザインシステム。CSS カスタムプロパティが正本(ADR-001)。
+
+- `src/tokens/base.css` — ニュートラル色、font stack、spacing。色トークン名は photo 由来(`--bg` `--fg` `--muted` `--line`)で変えない
+- `src/tokens/accents.css` — `--accent-1..5`。L/C は全色で揃え、hue だけ変える
+- `src/themes/<site>.css` — サイト別の地色の上書き。セレクタは `:root[data-site='<site>']`
+- `src/base.css` / `src/index.css` — 本文・リンク・フォーカスの最小スタイルと入口
+- `src/color/contrast.ts` — oklch → WCAG コントラスト比(純粋関数)
+- `src/tokens/parse.ts` — トークン CSS の解析(テストと check-colors が使う)
+- `src/uno/` `src/tailwind/` — UnoCSS / Tailwind v4 のアダプタ(var() への対応付けだけ)
+- `src/astro/` `src/scripts/` — ThemeToggle など小さな部品
+- `src/cli/` — `tanoshi-check-colors`
+- `tests/` — vitest(トークンのコントラストと整合性)
 
 ## Gate
 
-- コマンド: `pnpm gate`
-- UI 変更時: `pnpm gate:full`
-
-### ゲート通過後のレビュー
-
-<!-- 任意。ゲート通過後に並列起動するエージェント(例: ui-reviewer)。無ければ節ごと削除 -->
+- コマンド: `pnpm gate`(`lint:css` → `typecheck` → `test` → `build`)
+- **ゲート自体を緩める変更は禁止**: テストの `skip`、閾値(コントラスト比 4.5 / 3)の引き下げ、`.stylelintrc.json` の緩和。失敗は色の側を直す
 
 ### 指摘の優先順位
 
-<!-- 任意。/fix-loop が使う。既定: 動作不良 > セキュリティ > a11y > 見た目 -->
+動作不良 > a11y(コントラスト) > 見た目
 
 ### 失敗時の対処
 
-| 段 | 失敗の意味 | 対処 |
-|---|---|---|
-| <!-- 例: 依存方向 --> | | |
+| 段 | 対処 |
+|---|---|
+| `lint:css` | `pnpm lint:css:fix` で宣言順を直す。`:root` 内のカスタムプロパティは対象外 |
+| `typecheck` | 該当箇所の型を直す |
+| `test` | コントラスト不足は該当トークンの L/C を調整する(テストの閾値は動かさない)。dark ブロックと `prefers-color-scheme` ブロックは同じ内容にする |
+| `build` | `tsc -p tsconfig.build.json` のエラーを直す |
 
 ## Test policy
 
-- TDD 対象: <!-- 例: packages/*/src の純粋ロジック -->
-- フレームワーク: <!-- vitest -->
-- 配置: 対象と同じディレクトリの `<module>.test.ts`
-- 単体実行: <!-- pnpm --filter <pkg> test -->
+- TDD 対象: `src/color/`、`src/tokens/parse.ts`、`src/cli/` の純粋関数
+- フレームワーク: vitest
+- 配置: 対象と同じディレクトリの `<module>.test.ts`。トークン全体の検証は `tests/`
+- 単体実行: `pnpm vitest run <path>`
 
 ## Review checklist
 
-1. <!-- リポジトリ固有の観点 -->
+1. **色の置き場所**: `oklch()` リテラルが `src/tokens/` と `src/themes/` の外にないか。hex / rgb / 名前付きカラーがないか
+2. **トークン名**: photo 由来の名前(`--bg` `--fg` `--muted` `--line` `--font-sans`)を変えていないか。破壊的変更は semver の major
+3. **ダークの 3 ブロック**: `:root[data-theme='dark']` と `prefers-color-scheme` ブロックが同内容か。新しいトークンを足したら 3 ブロックすべてに入れたか
+4. **アクセントの使い方**: 本文の文字色に使っていないか(ドット、下線、アイコンなどの小さな面だけ)
+5. **コメント**: 新規コードに不要なコメントを足していないか
 
 ### パス別の追加エージェント
 
-| パス | エージェント |
-|---|---|
-| <!-- packages/foo/** --> | <!-- foo-guardian --> |
-
-## Verify
-
-<!-- 任意。/verify が headless Chromium(Playwright)で動作確認するための情報 -->
-- 起動: <!-- pnpm dev -->
-- URL / ポート: <!-- http://localhost:4321 -->
-- 準備完了の判定: <!-- URL が 200 を返す -->
-- 主要な画面: <!-- / , /editor -->
-- ブラウザの用意: `pnpm exec playwright install chromium`
-
-## Roadmap
-
-<!-- ROADMAP.md を使う場合のみ。同期コマンド: pnpm roadmap -->
+なし。
