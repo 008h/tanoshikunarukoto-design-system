@@ -29,3 +29,8 @@ export function contrastRatio(a, b) {
     const lb = relativeLuminance(b);
     return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
 }
+const encodeGamma = (value) => (value <= 0.0031308 ? 12.92 * value : 1.055 * value ** (1 / 2.4) - 0.055);
+export function toSrgbHex(color) {
+    const channels = toLinearSrgb(color).map((value) => Math.round(encodeGamma(clamp01(value)) * 255));
+    return `#${channels.map((value) => value.toString(16).padStart(2, '0')).join('')}`;
+}
