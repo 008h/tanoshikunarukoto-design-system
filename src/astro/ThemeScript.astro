@@ -1,0 +1,28 @@
+---
+interface Props {
+  site?: string;
+}
+
+const { site } = Astro.props;
+---
+
+<script is:inline define:vars={{ site }}>
+  {
+    const root = document.documentElement;
+    if (site) root.setAttribute('data-site', site);
+    let stored = null;
+    try {
+      stored = localStorage.getItem('theme');
+    } catch {}
+    const theme =
+      stored === 'light' || stored === 'dark'
+        ? stored
+        : window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light';
+    root.setAttribute('data-theme', theme);
+  }
+</script>
+<script>
+  import '../scripts/theme-toggle.js';
+</script>

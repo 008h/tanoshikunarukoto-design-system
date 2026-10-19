@@ -1,0 +1,56 @@
+---
+import { SITES, type SiteId } from '../sites.js';
+
+interface Props {
+  current?: SiteId;
+}
+
+const { current } = Astro.props;
+---
+
+<footer>
+  <nav aria-label="tanoshikunarukoto sites">
+    <ul>
+      {
+        SITES.map((site) => (
+          <li style={`--dot: var(--${site.accent})`}>
+            <a href={site.href} aria-current={site.id === current ? 'page' : undefined}>
+              {site.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <slot />
+</footer>
+
+<style>
+  footer {
+    padding: var(--space-4) 0;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li::before {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.5em;
+    content: '';
+    background: var(--dot);
+  }
+
+  a[aria-current='page'] {
+    color: var(--fg);
+  }
+</style>
