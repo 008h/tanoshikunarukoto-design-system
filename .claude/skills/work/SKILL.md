@@ -32,7 +32,7 @@ argument-hint: "<issue number>"
 UI・挙動に触れた変更なら、コミットの前に `/verify` で実ブラウザの動作確認まで行う。結果は PR の Test plan に書く。
 
 ## 5. コミット
-- atomic に分割、Conventional Commits（英語）、type は issue と一致させる。`--no-verify` 禁止
+- atomic に分割、Conventional Commits（type は英語、説明は日本語）、type は issue と一致させる。`--no-verify` 禁止
 
 ## 6. レビュー
 - `reviewer` エージェントを起動し `git diff origin/main...HEAD` をレビューさせる（ローカル `main` ではなく `origin/main`）。起動の依頼文には、対象の issue と変更の要点、最終報告に「指摘の一覧」と「人間レビューの要否判定」を含めること、バックグラウンド実行をしないことを書く(サブエージェントは親の会話を引き継がない)

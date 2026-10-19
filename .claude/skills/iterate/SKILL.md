@@ -30,7 +30,7 @@ argument-hint: "[focus]"
 UI・挙動に触れたタスクなら、コミットの前に `/verify` で動作確認まで行う。
 
 ## 4. コミット
-- このタスクで変更したファイルだけを `git add` し、Conventional Commits（英語）で1コミット
+- このタスクで変更したファイルだけを `git add` し、Conventional Commits（type は英語、説明は日本語）で1コミット
 - ゲート未通過でのコミット、`--no-verify` は禁止
 
 ## 5. 記録
