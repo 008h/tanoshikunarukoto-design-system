@@ -11,7 +11,7 @@
 - PR 本文は Summary と Test plan。issue があれば紐づけてよいが、必須ではない
 
 ## コミット
-- Conventional Commits(`feat:` `fix:` `refactor:` `docs:` `test:` `chore:` `perf:` `ci:`)、英語、1 つの論理的変更 = 1 コミット
+- Conventional Commits(`feat:` `fix:` `refactor:` `docs:` `test:` `chore:` `perf:` `ci:`)。`type:` は英語、説明は日本語(例: `fix: 認証の期限切れ判定を修正`)。1 つの論理的変更 = 1 コミット
 - `--no-verify` は使わない。フックやテストが落ちたら原因を直す
 - `main` の上でコミットしてしまった場合は、`git switch -c <branch>` で新しいブランチに移してから、`main` を `origin/main` に戻す(戻す前に内容を確認する)
 
