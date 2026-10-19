@@ -47,6 +47,11 @@ import SiteFooter from '@008h/design/astro/SiteFooter.astro';
 | `--font-sans` `--font-display` | 本文、見出し |
 | `--space-1..5` `--measure` `--radius` | 余白、本文幅、角丸 |
 
+## Changelog
+
+- 0.3.0: `--surface` `--danger` を追加。pixtitch テーマの `--bg` `--fg` を exact な `#f0ede8` / `#232025` に変更し、`--scrim`(light / dark とも、alpha 0.8)を追加。`ThemeToggle` の色を `--theme-toggle-color` で変更可能に
+- 0.2.0: `tokens.css`(トークンだけの入口)を追加
+
 `ThemeToggle` の色は `--theme-toggle-color`(既定は `--muted`)で変えられる。
 
 ## check-colors
