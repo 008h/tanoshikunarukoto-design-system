@@ -5,7 +5,7 @@
 ## Install
 
 ```sh
-pnpm add github:008h/tanoshikunarukoto-design-system#v0.1.0
+pnpm add github:008h/tanoshikunarukoto-design-system#v0.2.0
 pnpm add @fontsource-variable/urbanist @fontsource/kosugi
 ```
 
@@ -31,6 +31,7 @@ import SiteFooter from '@008h/design/astro/SiteFooter.astro';
 </html>
 ```
 
+- `@008h/design/tokens.css` はトークンだけ(`base.css` の本文・リンク・フォーカスのスタイルを含まない)。既に自前のベーススタイルを持つサイト向け
 - `<html data-site="...">` でテーマ(`pixtitch` / `blog`)、`data-theme="light|dark"` でモードを切り替える。`ThemeScript` が両方を初期化する
 - UnoCSS: `presets: [presetWind4(), presetTanoshi()]`(`@008h/design/uno`)。`bg-bg` `text-fg` `border-line` `text-accent-1` が使える
 - Tailwind v4: `@import '@008h/design/tailwind.css';`
