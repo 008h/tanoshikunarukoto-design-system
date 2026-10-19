@@ -1,5 +1,101 @@
 {
   "permissions": {
-    "allow": []
+    "allow": [
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(git fetch*)",
+      "Bash(git switch *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push origin *)",
+      "Bash(git push -u origin *)",
+      "Bash(git pull --ff-only*)",
+      "Bash(git branch --list*)",
+      "Bash(git branch --show-current)",
+      "Bash(gh pr *)",
+      "Bash(gh issue *)",
+      "Bash(gh run view*)",
+      "Bash(gh run list*)",
+      "Bash(gh run watch*)",
+      "Bash(pnpm install --frozen-lockfile)",
+      "Bash(pnpm gate*)",
+      "Bash(pnpm test*)",
+      "Bash(pnpm check*)",
+      "Bash(pnpm build)",
+      "Bash(pnpm exec playwright *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(sudo *)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean *)",
+      "Bash(gh repo delete *)",
+      "Bash(gh repo edit *)",
+      "Bash(gh secret *)",
+      "Bash(gh release delete *)",
+      "Bash(gh pr merge*--admin*)",
+      "Bash(gh api *DELETE*)",
+      "Bash(gh api *PUT*)",
+      "Bash(gh api *PATCH*)",
+      "Bash(gh api *POST*)",
+      "Bash(cat *.env*)",
+      "Bash(git add *.env*)",
+      "Read(./**/.env)",
+      "Read(./**/.env.*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard-git.sh\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/stop-promise-guard.sh\""
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/stop-verify-guard.sh\""
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/subagent-report-guard.sh\""
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "compact|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-context.sh\""
+          }
+        ]
+      }
+    ]
   }
 }
