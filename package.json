@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/008h/tanoshikunarukoto-design-system.git"
+    "url": "git+https://github.com/tanoshikunarukoto/tanoshikunarukoto-design-system.git"
   },
   "engines": {
     "node": ">=26.0.0"
