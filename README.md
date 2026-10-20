@@ -5,13 +5,13 @@
 ## Install
 
 ```sh
-pnpm add github:008h/tanoshikunarukoto-design-system#v0.3.0
+pnpm add github:tanoshikunarukoto/tanoshikunarukoto-design-system#v0.3.0
 pnpm add @fontsource-variable/urbanist @fontsource/kosugi
 ```
 
 npm には公開しない。
 
-npm で入れるサイトは、`github:` の指定ではなく、タグのタールボール URL で指定する(`npm i https://codeload.github.com/008h/tanoshikunarukoto-design-system/tar.gz/refs/tags/v0.3.0`)。npm は `github:` 指定の lockfile に `git+ssh://` の URL を書き込み、SSH 鍵のない CI(Cloudflare の Workers Builds など)で取得に失敗する。pnpm は `github:` のままでよい。
+npm で入れるサイトは、`github:` の指定ではなく、タグのタールボール URL で指定する(`npm i https://codeload.github.com/tanoshikunarukoto/tanoshikunarukoto-design-system/tar.gz/refs/tags/v0.3.0`)。npm は `github:` 指定の lockfile に `git+ssh://` の URL を書き込み、SSH 鍵のない CI(Cloudflare の Workers Builds など)で取得に失敗する。pnpm は `github:` のままでよい。
 git のタグで版を固定し、ビルド済みの `dist/` をリポジトリにコミットして配る(インストール時にビルドは走らない)。更新するときは、タグを新しくして各サイトの指定を書き換える。
 
 フォントは配らない。サイト側で上の 2 つを import する(`--font-sans` は Urbanist → Kosugi の順)。
